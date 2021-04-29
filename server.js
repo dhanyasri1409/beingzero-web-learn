@@ -7,7 +7,7 @@ app.get("/", function(req, res){
 });
 app.get("/resume", function(req, res){
     
-     file= __dirname+"/myresume.html";
+     file= __dirname+"/myresumee.html";
     res.sendFile(file);
 
 })
