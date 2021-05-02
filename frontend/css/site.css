@@ -1,3 +1,20 @@
-h1{
-    color:red;
+h2{
+    color:dodgerblue;
+    
+}
+h5
+{
+    text-align:right;
+    text-decoration-style: underline;
+}
+
+h4{
+    color:blue;
+}
+h7
+{
+    color:slateblue;
+}
+li{
+    font-size:20px;
 }
