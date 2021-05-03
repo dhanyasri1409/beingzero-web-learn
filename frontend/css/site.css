@@ -27,7 +27,7 @@ li{
   
   .right {
     position: absolute;
-    right: 400px;
+    right: 550px;
     width: 300px;
     
     padding: 10px;
@@ -41,7 +41,7 @@ li{
   }
   .left{
     position: absolute;
-    left: 365px;
+    left: 450px;
     width: 300px;
     
     padding: 10px;
