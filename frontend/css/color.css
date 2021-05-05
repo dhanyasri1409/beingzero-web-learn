@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+body{
+    background: black;
+}  
+.main {
+    height: 250px;
+    width: 250px;
+    background:white;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color:black;
+    
+}
+  h1,h2{
+      color:rgb(18, 106, 221);
+  }
+
+  
+input[type="range"] {
+
+    height: 20px;
+    width: 90%;
+    border-radius: 50px;
+    outline:#000;
+}
+  
+
+input[type="range"]{
+    
+    height: 24px;
+    width: 70px;
+    background: #fff;
+    border-radius: 50%;
+  
+}
+  
+.main #red {
+    background: linear-gradient(90deg, #000, red);
+}
+  
+.main #green {
+    background: linear-gradient(90deg, #000, green);
+}
+  
+.main #blue {
+    background: linear-gradient(90deg, #000, blue);
+}
