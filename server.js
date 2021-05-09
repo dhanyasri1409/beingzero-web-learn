@@ -24,6 +24,12 @@ app.get("/apple", function(req, res){
     res.sendFile(file);
 
 })
+app.get("/register", function(req, res){
+    
+    let file= __dirname+"/frontend/html/register.html";
+    res.sendFile(file);
+
+})
 app.get("/colorpick", function(req, res){
     
     let file= __dirname+"/frontend/html/colorpick.html";

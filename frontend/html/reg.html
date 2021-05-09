@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" />
+</head>
+<body>
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+
+    <script src="/js/login.js"></script>
+    <h1 >Registration form</h1>
+        <form action='#'>
+        <div>
+        <label for="firstname"><b>First Name</b></label><br>
+        <input type="test" placeholder="enter your  first name" name="firstname" required><br>
+        <label for="lastname"><b>Last Name</b></label><br>
+        <input type="test" placeholder="enter your last name" name=lastname" required><br>
+        <label for="email"><b>Email</b></label><br>
+        <input type="test" placeholder="email id" name="email" required><br>
+        <label for="phonenumber"><b>PhoneNumber</b></label><br>
+        <input type="test" placeholder="***-***-****" name="phonenumber" required><br>
+        
+        <label for="psw"><b>Password</b></label><br>
+            <input type="password" placeholder="Enter Password" name="psw" required><br>
+        
+            <label for="psw-repeat"><b>Repeat Password</b></label><br>
+            <input type="password" placeholder="Repeat Password" name="psw-repeat" required><br>
+        <input type="button" id="f" value="register" onclick="validatebutton();"><span id=message"></span>
+        </form>	    
+</body>
+</html>
