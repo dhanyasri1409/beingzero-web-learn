@@ -1,12 +1,21 @@
-const mongoose=require('mongoose');
+var mongoose = require('mongoose');
 
-module.exports.connect=function(){
-    var password = process.env.Mongo_atlas_password;
-    var connectionString = "mongodb+srv://dhanyasrit:"+password+"@cluster0.v4dsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+module.exports.connect = function(){
+    var p=process.env.Mongo_atlas_password;
+    //console.log("in dbconn");
+    var s="mongodb+srv://dhanyasrit:"+p+"@cluster0.v4dsq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
-mongoose.connect(connectionString, {useUnifiedTopology: true,useNewUrlParser: true});
-mongoose.connection.on('connected', function(){
-    console.log("Database connected");
+    var dbops = {useUnifiedTopology: true,useNewUrlParser: true}
+    mongoose.connect(s,dbops);
+    var db = mongoose.connection;
+    db.on('connected', function() {
+    console.log("Successfully connected to MongoDB!");
+    });
 
-});
+    db.on('error',function(err){
+        console.log('connect error:'+err);
+    })
+    db.on('disconnected',function(){
+        console.log('disconnected');
+    })
 }
