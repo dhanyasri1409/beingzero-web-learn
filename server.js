@@ -16,10 +16,10 @@ app.get('/api/courses',courselib.getallcourses);
 app.post('/api/courses',function(req,res){
     courselib.createcourse(req,res);
 });
-//const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
  
 // Start the server
-app.listen(3000, function(){
+app.listen(PORT, function(){
     console.log("runnig server http://localhost:3000");
 })
 //const mongoose = require('mongoose');
