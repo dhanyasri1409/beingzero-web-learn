@@ -1,16 +1,11 @@
 const coursemodel = require('../models/coursemodel');
 module.exports.createcourse=function(req,res){
-    var course=new coursemodel(req.body);
-    course.save(function(err,courseobj){
-        if(err)
-        {
-            console.log("err"+err);
-        }
-        else{
-            callback(err,courseobj);
-        } 
-    })
-
+    var a=new coursemodel({
+        coursename:req.body.course,
+        articles:req.body.arts
+    });
+    a.save();                       
+    res.redirect("/crud");
 }
 
 module.exports.getallcourses=function(req, res){

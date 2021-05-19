@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
     <meta name="author" content="Being Zero Pvt Ltd">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <style>
@@ -18,6 +20,23 @@
         .result {
             max-width: 80px;
         }
+        a:link, a:visited {
+            background-color: #FF5964;
+            color: white;
+            padding: 8px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 15px;
+            font-family: Montserrat;
+            font-size: small;
+            margin-top:5% ;
+            margin-left: 65%;
+    }
+
+a:hover, a:active {
+  background-color: red;
+}
     </style>
 </head>
 <body>
@@ -29,16 +48,13 @@
                 <div class="clearfix"><br /></div>
                 <div class="card card-body">
                     <!-- Form Wrapper & Button -->
+                    <form action="/api/courses" method="POST">
                     <div class="form-wrapper hidden" style="width: 61%;">
-                        <select class="form-control" id="test-name" style="margin: 10px;">
-                            <option selected>select course</option>
-                            <option>Java</option>
-                            <option>Python</option>
-                            <option>Php</option>
-                        </select>
-                        <input class="form-control" placeholder=" Enter no of articels" type="number" id="test-result" style="margin: 10px;">
+                        <input class="form-control" placeholder=" Enter Course name" type="text" id="test-name" style="margin: 10px;" name="course">
+                        <input class="form-control" placeholder=" Enter no of articels" type="number" id="test-result" style="margin: 10px;" name="arts">
                         <button class="btn btn-sm btn-info" id="create-test" style="margin: 10px;">Add</button>
                     </div>
+                    </form>
                     <!-- Data Table -->
                     <table class="table">
                         <thead>
@@ -54,13 +70,13 @@
             </div>
         </div>
     </div>
-
+    <!-- <span class="a"><a href="/crudupdate">Update values from here</a></span> -->
 </body>
 </html>
 <script>
 
-    var newId = 4
-    var newTest = { 'name': null, 'id': newId, 'Articels': null }
+    var i=1;
+    var newTest = { 'name': null, 'id':i, 'Articels': null }
 
     $('#add-test').on('click', function () {
         $('.form-wrapper').removeClass('hidden')
@@ -71,59 +87,42 @@
         console.log(newTest)
 
     })
-
-    $('#test-name').on('change', function () {
+    $('#test-name').on('keyup', function () {
         newTest.name = $(this).val()
         console.log(newTest)
-    })
 
-    $('#create-test').on('click', function () {
-        if (newTest.name == null) {
-            alert('No test selected!')
-        } else {
-            addRow(newTest)
-            $('#test-name').val('')
-            $('#test-result').val('')
-            $('.form-wrapper').addClass('hidden')
-        }
     })
-
     
     $.get("/api/courses", function(data, status){
-      console.log("Data: " + JSON.stringify(data) + "\nStatus: " + status);
-    //   var tests = [
-    //     { 'name': 'Javascript', 'id': '1', 'Articels': "43" },
-    //     { 'name': 'HTML', 'id': '2', 'Articels': "1" },
-    //     { 'name': 'CSS', 'id': '3', 'Articels': "24" },
-    // ]
-        var tests = data;
-        for (var i in tests) {
-            addRow(tests[i])
-        }
+        for (var i in data) {
+        addRow(data[i])
+    }
+        
     });
-
-    function addRow(obj) {
-        var row = `<tr scope="row" class="test-row-${obj._id}">
+    function addRow(obj) {    
+        obj.id=i;
+        i=i+1;
+        var row = `<tr scope="row" class="test-row-${obj.id}">
                        <td>${obj.coursename}</td>
-                       <td id="result-${obj._id}" data-testid="${obj._id}"">${obj.articles}</td>
+                       <td id="result-${obj.id}" data-testid="${obj.id}"">${obj.articles}</td>
                        <td>
-                         <button class="btn btn-sm btn-danger" data-testid=${obj._id} id="delete-${obj._id}">Delete</button>
-                         <button class="btn btn-sm btn-info" disabled data-testid="${obj._id}"  id="save-${obj._id}">Save</button>
+                         <button class="btn btn-sm btn-danger" data-testid=${obj.id} id="delete-${obj.id}">Delete</button>
+                         <button class="btn btn-sm btn-info" disabled data-testid="${obj.id}"  id="save-${obj.id}">Save</button>
 
-                         <button class="btn btn-sm btn-danger hidden" data-testid="${obj._id}"  id="cancel-${obj._id}">Cancel</button>
-                         <button class="btn btn-sm btn-primary hidden" data-testid="${obj._id}"  id="confirm-${obj._id}">Confirm</button>
+                         <button class="btn btn-sm btn-danger hidden" data-testid="${obj.id}"  id="cancel-${obj.id}">Cancel</button>
+                         <button class="btn btn-sm btn-primary hidden" data-testid="${obj.id}"  id="confirm-${obj.id}">Confirm</button>
 
                        </td>
                    </tr>`
         $('#tests-table').append(row)
 
-        $(`#delete-${obj._id}`).on('click', deleteTest)
-        $(`#cancel-${obj._id}`).on('click', cancelDeletion)
-        $(`#confirm-${obj._id}`).on('click', confirmDeletion)
-        $(`#save-${obj._id}`).on('click', saveUpdate)
+        $(`#delete-${obj.id}`).on('click', deleteTest)
+        $(`#cancel-${obj.id}`).on('click', cancelDeletion)
+        $(`#confirm-${obj.id}`).on('click', confirmDeletion)
+        $(`#save-${obj.id}`).on('click', saveUpdate)
 
 
-        $(`#result-${obj._id}`).on('click', editResult)
+        $(`#result-${obj.id}`).on('click', editResult)
 
     }
 

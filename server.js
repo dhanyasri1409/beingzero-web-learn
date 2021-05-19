@@ -3,7 +3,7 @@ const courselib=require('./backend/lib/courselib');
 const dbconnect = require('./backend/db/dbconnect');
 const app = express();
 dbconnect.connect();
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:true}));        
 app.use(express.json());
 const mongoose = require('mongoose');
 app.use(express.static(__dirname+"/frontend"));
@@ -13,7 +13,9 @@ app.get('/crud',function(req,res)
 })
 app.get('/api/courses',courselib.getallcourses);
 
-app.post('/api/courses',courselib.createcourse);
+app.post('/api/courses',function(req,res){
+    courselib.createcourse(req,res);
+});
 //const PORT = process.env.PORT || 3000;
  
 // Start the server
