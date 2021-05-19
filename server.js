@@ -1,9 +1,12 @@
 const express = require('express');
-const courselib=require('./backend/lib/courselib')
+const courselib=require('./backend/lib/courselib');
+const dbconnect = require('./backend/db/dbconnect');
 const app = express();
-
+dbconnect.connect();
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+const mongoose = require('mongoose');
+app.use(express.static(__dirname+"/frontend"));
 app.get('/crud',function(req,res)
 {
     res.sendFile(__dirname+"/frontend/html/crud.html");
