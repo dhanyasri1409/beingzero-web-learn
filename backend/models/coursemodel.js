@@ -1,9 +1,26 @@
-const mongoose=require('mongoose');
-var courseSchema = new mongoose.Schema({
-    coursename:String,
-    articles:Number,
-    isDeleted:Boolean
+const mongoose = require("mongoose");
+
+const course = new mongoose.Schema({
+  id : Number,
+  name: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
+  articles: {
+    type: Number,
+    default: 0,
+    validate(value) {
+      if (value < 0) throw new Error("Negative");
+    },
+  },
+  isDeleted: {
+      type: Boolean,
+      default: false
+  }
 });
 
-var courseModel = mongoose.model('courseTable',courseSchema);
-module.exports = courseModel;
+const coursemodel = mongoose.model("course", course);
+
+module.exports = coursemodel;

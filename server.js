@@ -1,4 +1,5 @@
 const express = require('express');
+
 const courselib=require('./backend/lib/courselib');
 const dbconnect = require('./backend/db/dbconnect');
 const app = express();
@@ -7,15 +8,24 @@ app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 const mongoose = require('mongoose');
 app.use(express.static(__dirname+"/frontend"));
-app.get('/crud',function(req,res)
-{
-    res.sendFile(__dirname+"/frontend/html/crud.html");
-})
-app.get('/api/courses',courselib.getallcourses);
 
-app.post('/api/courses',function(req,res){
-    courselib.createcourse(req,res);
-});
+// app.get('/crud',function(req,res)
+// {
+//     res.sendFile(__dirname+"/frontend/html/crud.html");
+// })
+// app.get('/api/courses',courselib.getallcourses);
+
+// app.post('/api/courses',function(req,res){
+//     courselib.createcourse(req,res);
+// });
+app.get("/crudoper",function(req,res){
+    let filepathname9=__dirname+"/frontend/html/crud.html";
+    res.sendFile(filepathname9);
+})
+app.get("/crud", courselib.getall);
+app.delete("/crud/:idd", courselib.deleteone);
+app.post("/crud",courselib.addnewone);
+app.put("/crud/:idd", courselib.update);
 const PORT = process.env.PORT || 3000;
  
 // Start the server
