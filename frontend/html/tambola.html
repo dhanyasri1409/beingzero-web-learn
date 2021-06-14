@@ -1,0 +1,138 @@
+<html> 
+    <head>
+        <title>
+            Tambola Game
+        </title>   
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        #board{
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            height: 50%;
+        }
+        #start{
+            float: left;
+        }
+        #clear{
+            float: right;
+        }
+    </style>
+    <body style="background-color:darkcyan">
+      
+        <h2 id="head" style="font-family: Montserrat;text-align: center;">TAMBOLA GAME</h2>
+    
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <div id="numgen">
+                    <h1 id="numtext"></h1>
+                </div>
+            </div>
+            
+    
+            <br>
+    
+            <div class="container d-flex justify-content-center" style="text-align: center;">
+                <button id="start" class="btn btn-outline-success btn-sm" style="background-color:#FF5964; color:cornsilk; font-family: Montserrat;">Generate Number</button>
+                
+                <button id="clear" class="btn btn-outline-danger btn-sm" style="background-color:#FF5964; color:cornsilk; font-family: Montserrat;">Clear Board</button>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <table id="board" class="table table-bordered table-sm"></table>
+            </div>
+    
+    
+    
+        </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+        <script>
+            var numbers = [];
+            for(let i=1;i<=90;i++)
+                numbers.push(i);
+
+            function display(){
+            var t = "<tr>", x = "";
+            for(let i=1;i<=90;i++){
+            if(i%10==0){
+                x += "<td align='center' id='"+i+"' >"+i+"</td>";
+                t+=x;
+                t+="</tr>"
+            if(i!=90)t +="<tr>";
+            x = "";
+                    }
+        else 
+        x += "<td align='center' id='"+i+"'  >"+i+"</td>";
+    }
+    
+    $("#board").css({
+        "background-color" : "white",
+    })
+    $('td').css('border','2px solid black')
+    $("#board").html(t);
+
+}
+
+
+    function addNum(n){
+        var s = getColor();
+    $('#'+n).css({
+        "background-color" : s
+    });
+}
+
+function getColor(){
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (let i=0;i<6;i++){
+      color += letters[ Math.floor(Math.random() * 16) ];
+    }
+    return color;
+}
+
+
+$(document).ready(()=>{
+    display();
+    $("#start").click(()=>{
+
+        if(numbers.length==0){
+            alert("Game is Completed !!");
+            alert("Press Clear Board, to start a New Game")
+        }
+
+        var n = numbers[ Math.floor(Math.random()*numbers.length) ]
+        if(numbers.includes(n)){
+            $('#numtext').html(n);
+            var ind = numbers.indexOf(n);
+            numbers.splice(ind,1);
+            
+            addNum(n.toString());
+
+        }
+
+    })
+
+    $("#clear").click(()=>{
+
+        for(let i=1;i<=90;i++)numbers.push(i);
+        $('#numtext').html('');
+        $('td').css({
+            "background-color" : "green"
+        });
+
+    })
+
+
+})
+        </script>
+             </body>
+</html>
